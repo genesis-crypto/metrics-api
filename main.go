@@ -58,17 +58,6 @@ type Message struct {
 	Content string `json:"content"`
 }
 
-var messageType = graphql.NewObject(
-	graphql.ObjectConfig{
-		Name: "Message",
-		Fields: graphql.Fields{
-			"content": &graphql.Field{
-				Type: graphql.String,
-			},
-		},
-	},
-)
-
 var rootQuery = graphql.ObjectConfig{
 	Name: "Query",
 	Fields: graphql.Fields{
