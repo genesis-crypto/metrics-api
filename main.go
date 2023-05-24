@@ -77,13 +77,12 @@ var schema, _ = graphql.NewSchema(
 )
 
 func main() {
+	channel := receiveMessages()
 	go func() {
-		for {
-			channel := receiveMessages()
-			data := <-channel
-			msg := string(data.Body)
-			formted := strings.Split(msg, ":")[1]
-			m[formted] += 1
+		for msg := range channel {
+			data := string(msg.Body)
+			formatted := strings.Split(data, ":")[1]
+			m[formatted] += 1
 		}
 	}()
 
