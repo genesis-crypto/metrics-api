@@ -1,11 +1,11 @@
 import http from 'k6/http';
 import { sleep } from 'k6';
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODUzMDg2NzIsInN1YiI6IjJjNTY0MGEwLWZkYzktNDYzOS1iOWJhLTE2YTczN2M2YzVkOSJ9.qhVdXR3cwT74Fn7FUtXDIep_2-OzQRUCWBCgcjXmB-s'
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODU0MDM0NjUsInN1YiI6IjJjNTY0MGEwLWZkYzktNDYzOS1iOWJhLTE2YTczN2M2YzVkOSJ9.aySBf6RciCjM4Tj-6G9M2zEIp-6PALdzNk7K1VkNQ6U'
 
 export const options = {
-  vus: 10000,
-  iterations: 100000,
+  vus: 200,
+  iterations: 10000,
   duration: '60s',
 };
 
@@ -17,6 +17,6 @@ export default function () {
     },
   };
 
-  http.get('http://localhost:8080/links/71xmAR5Z', params);
+  http.get('http://localhost:8080/links/YxrQtK8Z', params);
   sleep(1);
 }

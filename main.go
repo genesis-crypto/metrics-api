@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"sync"
 
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
@@ -12,6 +13,7 @@ import (
 )
 
 var m = make(map[string]int)
+var mMutex sync.Mutex
 
 func receiveMessages() <-chan amqp.Delivery {
 	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
@@ -82,7 +84,9 @@ func main() {
 		for msg := range channel {
 			data := string(msg.Body)
 			formatted := strings.Split(data, ":")[1]
+			mMutex.Lock()
 			m[formatted] += 1
+			mMutex.Unlock()
 		}
 	}()
 
